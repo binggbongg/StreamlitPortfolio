@@ -138,27 +138,32 @@ with main_col:
 st.markdown("---")
 
 # ---------- 3. Contact & Feedback Form ----------
-st.markdown("### Get In Touch")
-st.write("Have a question, feedback, or want to collaborate? Leave a message below.")
 
-with st.form("contact_form", clear_on_submit=True):
-    col_name, col_email = st.columns(2)
-    with col_name:
-        sender_name = st.text_input("Name")
-    with col_email:
-        sender_email = st.text_input("Email")
+_, contact_col, _ = st.columns([0.1, 1, 0.1], gap="large")
+
+with contact_col:
+
+    st.markdown("### Get In Touch")
+    st.write("Have a question, feedback, or want to collaborate? Leave a message below.")
+
+    with st.form("contact_form", clear_on_submit=True):
+        col_name, col_email = st.columns(2)
+        with col_name:
+            sender_name = st.text_input("Name")
+        with col_email:
+            sender_email = st.text_input("Email")
+            
+        topic = st.selectbox(
+            "Reason for Contact",
+            ["General Inquiry", "Project Collaboration", "Feedback", "Other"]
+        )
         
-    topic = st.selectbox(
-        "Reason for Contact",
-        ["General Inquiry", "Project Collaboration", "Feedback", "Other"]
-    )
-    
-    message = st.text_area("Your Message")
-    submitted = st.form_submit_button("Send Message")
+        message = st.text_area("Your Message")
+        submitted = st.form_submit_button("Send Message")
 
-    if submitted:
-        if sender_name.strip() and message.strip():
-            # Response after submission satisfies the component requirement
-            st.success(f"Thank you, {sender_name}! Your message has been sent successfully.")
-        else:
-            st.error("Please fill in both your name and message before submitting.")
+        if submitted:
+            if sender_name.strip() and message.strip():
+                # Response after submission satisfies the component requirement
+                st.success(f"Thank you, {sender_name}! Your message has been sent successfully.")
+            else:
+                st.error("Please fill in both your name and message before submitting.")
